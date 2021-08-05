@@ -1,0 +1,4 @@
+Comment réagir quand la cible a été tué ?
+Créer un interface graphique pour se déplacer et tirer
+Coder une IA pour déplacer le joueur
+Place plusieurs cibles sur la carte
