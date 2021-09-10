@@ -1,14 +1,15 @@
 Objectifs
 =======
 
-L'objectif de cet exercice est de coder un serveur d'un petit jeu. 
-Le but du jeu est de trouver une cible et de l'éliminer.
+L'objectif de cet exercice est de coder un serveur d'un jeu. 
+Le but du jeu est de trouver une cible sur une carte et de l'éliminer.
 
 Règle du jeu
 =======
-Le jeu se déroule sur une carte carré de 21 cases de coté.
+Le jeu se déroule sur une carte carré de X cases de coté. *X est déterminer a votre discrétion*
 
 La cible est placé aléatoirement en début de jeu sur une position (x,y).
+Elle se déplace aléatoirement sur une case a coté d'elle a chaque fois que le joueur tire.
 
 Le joueur est placé au milieu de la carte en début de partie.
 
@@ -25,15 +26,18 @@ Le joueur peut se effectuer les actions suivantes :
 
 La cible doit être touché trois fois pour être éliminer
 
+Si la partie est terminé le server renvoie une erreur HTTP 400 pour toutes les routes
+Si la partie n'est pas commencé le serveur renvoie une erreur HTTP 404 pour toutes les routes
+
 Route du serveurs
 =======
 
-**Request start** => Permet de démarrer la partie ou de la remettre à 0 si la partie est deja en cours
+**Start request** => Permet de démarrer la partie ou de la remettre à 0 si la partie est deja en cours
 ```
 POST /start
 ```
 
-**Request move** => Permet au joueur de se déplacer sur la carte
+**Move request** => Permet au joueur de se déplacer sur la carte
 ```
 POST /move
 {
@@ -54,7 +58,7 @@ POST /move
 }
 ```
 
-**Request shoot** => Permet au joueur de tirer
+**Shoot request** => Permet au joueur de tirer
 ```
 POST /shoot
 {
@@ -72,13 +76,13 @@ POST /shoot
 Bonus
 =======
 
-**Request map** => Permet de visualiser la carte
+**Map request** => Permet de visualiser la carte
 ```
 GET /map
 ```
 **Response**
 
-Représentation graphique la carte à l'instant T, ça peut être en assci art :-)
+Représentation assci la carte à l'instant T :-)
 
 Livrable attendu
 =======
