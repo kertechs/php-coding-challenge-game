@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PlayerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PlayerRepository::class)
  */
+#[ApiResource]
 class Player
 {
     /**
@@ -40,12 +44,12 @@ class Player
     /**
      * @ORM\Column(type="integer")
      */
-    private $x;
+    private $x=0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $y;
+    private $y=0;
 
     public function getId(): ?int
     {
@@ -128,4 +132,17 @@ class Player
 
         return $this;
     }
+
+	public function setPosition(int $x, int $y)
+	{
+		if (! (0 <= $x && $x < Game::DEFAULT_MAP_WIDTH)) {
+			throw new \Exception(Game::ERROR_INVALID_PLAYER_POSITION . '(x='.$x.')');
+		}
+		if (! (0 <= $y && $y < Game::DEFAULT_MAP_HEIGHT)) {
+			throw new \Exception(Game::ERROR_INVALID_PLAYER_POSITION . '(y='.$y.')');
+		}
+
+		$this->x = $x;
+		$this->y = $y;
+	}
 }
